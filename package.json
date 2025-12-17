@@ -1,0 +1,16 @@
+{
+  "name": "p4trafik-notification",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env index.js",
+    "docker": "docker-compose build && docker-compose up -d"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "eventsource": "^4.1.0"
+  }
+}

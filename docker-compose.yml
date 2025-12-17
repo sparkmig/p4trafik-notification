@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  p4trafik-notification:
+    build: .
+    env_file:
+      - .env
+    restart: unless-stopped
