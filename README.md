@@ -6,6 +6,7 @@ A Node.js application that subscribes to DR's traffic API (P4 Trafik) using Serv
 
 - Real-time traffic updates from DR's P4 Trafik API
 - Push notifications via Pushover
+- Flexible logging system with file and console loggers
 - Docker support with Docker Compose
 - Automatic reconnection handling
 - Graceful shutdown with cleanup
@@ -77,9 +78,14 @@ docker-compose down
 p4trafik-notification/
 ├── src/
 │   ├── event-handlers.js      # EventSource event handlers
+│   ├── logging/
+│   │   ├── factory.js          # Logger factory (singleton pattern)
+│   │   ├── logger-base.js      # Base logger class
+│   │   └── file-logger.js      # File logger implementation
 │   └── notification/
 │       ├── client.js           # Pushover notification client
 │       └── index.js            # Notification service export
+├── logs/                       # Application logs directory (auto-created)
 ├── index.js                    # Application entry point
 ├── main.js                     # Main logic and EventSource setup
 ├── package.json
@@ -103,11 +109,49 @@ p4trafik-notification/
 | `PUSHOVER_USER_KEY` | Your Pushover user key | Yes |
 | `PUSHOVER_APP_TOKEN` | Your Pushover application token | Yes |
 
+## Logging
+
+The application includes a flexible logging system with multiple logger types:
+
+### Logger Types
+
+- **File Logger**: Writes logs to `logs/application.log` with timestamps and log levels
+- **Console Logger**: Outputs logs directly to the console
+
+### Using the Logger
+
+```javascript
+const LoggingFactory = require('./src/logging/factory.js').default;
+
+// Get logger factory instance (singleton)
+const factory = LoggingFactory.getInstance();
+
+// Create a file logger
+const logger = factory.createLogger('file');
+
+// Use logger methods
+logger.info('Application started');
+logger.error('An error occurred');
+logger.warning('Warning message');
+logger.debug('Debug information');
+```
+
+### Log Format
+
+File logs are formatted as:
+```
+[2025-12-17T10:30:45.123Z] [INFO]: Application started
+[2025-12-17T10:30:46.456Z] [ERROR]: An error occurred
+```
+
+The `logs/` directory is automatically created at the project root when using the file logger.
+
 ## Development
 
 The application uses:
 - `eventsource` - For Server-Sent Events client support in Node.js
 - Pushover API - For push notifications
+- Custom logging system with factory pattern
 
 ## License
 

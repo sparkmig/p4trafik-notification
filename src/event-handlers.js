@@ -1,15 +1,14 @@
 const { notificationClient } = require('./notification/index');
-
+const LoggingFactory = require('./logging/factory').default
 const USER_KEY = process.env.PUSHOVER_USER_KEY;
+const logger = LoggingFactory.getInstance().createLogger('file');
 
 const onError = (error) => {    
-    console.error("EventSource failed:", error);
-   
+    logger.error(`Received message: ${event.data}`);
 };
 
 const onMessage = (event) => {
-    console.log("New message received:", event);
-    console.log("JSON:", JSON.parse(event));
+    logger.info(`Received message: ${event.data}`);
     
     notificationClient.sendNotification(USER_KEY, {
         title: "EventSource Error",
@@ -18,7 +17,7 @@ const onMessage = (event) => {
 };
 
 const onOpen = (event) => {
-    console.log("Connection to EventSource opened.", event);
+    logger.info("Connection to EventSource opened.");
 }
 
 module.exports = {
