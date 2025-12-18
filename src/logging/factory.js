@@ -12,15 +12,15 @@ class LoggingFactory {
         default:
             throw new Error(`Unknown logger type: ${loggerType}`);
     }
-    
-    return logger;
   }
 
-  static getInstance() {
-    if (!LoggingFactory.instance) {
-      LoggingFactory.instance = new LoggingFactory();
+  static #instance;
+
+  static get instance() {
+     if (!LoggingFactory.#instance) {
+      LoggingFactory.#instance = new LoggingFactory();
     }
-    return LoggingFactory.instance;
+    return LoggingFactory.#instance;
   }
 }
 

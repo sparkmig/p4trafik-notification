@@ -1,15 +1,14 @@
 const eventHandlers = require('./src/event-handlers.js');
-const { EventSource } = require('eventsource');
+const { P4TrafikEventSource } = require('./src/p4trafik-event/p4trafik-eventsource.js');
 
 const SUBSCRIBE_URL = 'https://api.dr.dk/trafik/subscribe';
 let e = null;
 
 function main() {   
-    e = new EventSource(SUBSCRIBE_URL);
+    e = new P4TrafikEventSource(SUBSCRIBE_URL);
     e.onerror = eventHandlers.onError;
     e.onopen = eventHandlers.onOpen;
-    e.addEventListener("new-post", eventHandlers.newPost);
-    e.onmessage = eventHandlers.onMessage;
+    e.onnewpost = eventHandlers.newPost;
 }
 
 function exitHandler(options, exitCode) {
