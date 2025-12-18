@@ -4,15 +4,15 @@ const USER_KEY = process.env.PUSHOVER_USER_KEY;
 const logger = LoggingFactory.getInstance().createLogger('file');
 
 const onError = (error) => {    
-    logger.error(`Received message: ${event.data}`);
+    logger.error(JSON.stringify(error));
 };
 
-const onMessage = (event) => {
-    logger.info(`Received message: ${event.data}`);
+const newPost = (event) => {
+    logger.info(`Received message: ${event}`);
     
     notificationClient.sendNotification(USER_KEY, {
-        title: "EventSource Error",
-        message: `An error occurred: `
+        title: "New traffic update",
+        message: `Something happend `
     });
 };
 
@@ -22,6 +22,6 @@ const onOpen = (event) => {
 
 module.exports = {
     onError,
-    onMessage,
+    newPost,
     onOpen,
 };

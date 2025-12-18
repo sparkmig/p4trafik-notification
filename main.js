@@ -7,8 +7,9 @@ let e = null;
 function main() {   
     e = new EventSource(SUBSCRIBE_URL);
     e.onerror = eventHandlers.onError;
-    e.onmessage = eventHandlers.onMessage;
     e.onopen = eventHandlers.onOpen;
+    e.addEventListener("new-post", eventHandlers.newPost);
+    e.onmessage = eventHandlers.onMessage;
 }
 
 function exitHandler(options, exitCode) {
