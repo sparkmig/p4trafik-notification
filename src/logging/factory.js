@@ -24,4 +24,4 @@ class LoggingFactory {
   }
 }
 
-exports.default = LoggingFactory;
+exports.LoggingFactory = LoggingFactory;

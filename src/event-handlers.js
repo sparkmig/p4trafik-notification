@@ -1,5 +1,5 @@
 const { notificationClient } = require('./notification/client');
-const LoggingFactory = require('./logging/factory').default
+const { LoggingFactory } = require('./logging/factory')
 
 const USER_KEY = process.env.PUSHOVER_USER_KEY;
 
