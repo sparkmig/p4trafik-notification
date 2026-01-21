@@ -4,7 +4,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --env-file=.env index.js",
+    "dev": "node --env-file=.env index.js",
+    "prod": "node index.js",
     "docker": "docker-compose build && docker-compose up -d"
   },
   "author": "",
