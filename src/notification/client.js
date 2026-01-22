@@ -21,4 +21,4 @@ class NotifactionClient {
     }
 }
 
-exports.default = NotifactionClient;
+exports.NotifactionClient = NotifactionClient;
