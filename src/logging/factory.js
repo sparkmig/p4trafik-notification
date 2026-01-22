@@ -1,14 +1,14 @@
+const { ConsoleLogger } = require('./console-logger.js');
 const FileLogger = require('./file-logger.js').default;
 
 class LoggingFactory {
   createLogger(loggerType) {
-    let logger;
     
     switch (loggerType) {
         case 'file':
             return new FileLogger();
         case 'console':
-            return console;
+            return new ConsoleLogger();
         default:
             throw new Error(`Unknown logger type: ${loggerType}`);
     }

@@ -3,7 +3,7 @@ const { LoggingFactory } = require('./logging/factory')
 
 const USER_KEY = process.env.PUSHOVER_USER_KEY;
 
-const logger = LoggingFactory.instance.createLogger('file');
+const logger = LoggingFactory.instance.createLogger('console');
 const notificationClient = new NotifactionClient(process.env.PUSHOVER_APP_TOKEN);
 
 const onError = (error) => {    
