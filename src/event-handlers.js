@@ -7,7 +7,8 @@ const logger = LoggingFactory.instance.createLogger('console');
 const notificationClient = new NotifactionClient(process.env.PUSHOVER_APP_TOKEN);
 
 const onError = (error) => {    
-    logger.error(JSON.stringify(error));
+    if(error.message != "TypeError: terminated: other side closed")
+        logger.error(JSON.stringify(error));
 };
 
 const newPost = (event) => {
@@ -21,7 +22,6 @@ const newPost = (event) => {
 };
 
 const onOpen = (event) => {
-    console.log(notificationClient);
     logger.info("Connection to EventSource opened.");
 }
 
